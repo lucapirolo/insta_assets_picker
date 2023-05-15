@@ -492,7 +492,7 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
                                       onTap: unSelectAll,
                                       theme: pickerTheme,
                                       icon: const Icon(
-                                        Icons.camera,
+                                        Icons.layers_clear_sharp,
                                         size: 18,
                                       ),
                                     ),
