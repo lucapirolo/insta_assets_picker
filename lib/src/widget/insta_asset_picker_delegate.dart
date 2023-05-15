@@ -27,6 +27,7 @@ const _kPathSelectorRowHeight = 50.0;
 
 class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
   InstaAssetPickerBuilder({
+    this.actions,
     required super.initialPermission,
     required super.provider,
     required this.onCompleted,
@@ -41,6 +42,7 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
     this.title,
     this.closeOnComplete = false,
     InstaAssetCropDelegate cropDelegate = const InstaAssetCropDelegate(),
+    this.hideUnselectButton = false,
   })  : _cropController =
             InstaAssetsCropController(keepScrollOffset, cropDelegate),
         super(
@@ -49,6 +51,8 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
         );
 
   final String? title;
+  final List<CircleIconButton>? actions;
+  final bool hideUnselectButton;
 
   final Function(Stream<InstaAssetsExportDetails>) onCompleted;
 
@@ -479,18 +483,19 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
                               height: _kPathSelectorRowHeight,
                               width: MediaQuery.of(context).size.width,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   pathEntitySelector(context),
-                                  CircleIconButton(
-                                    onTap: unSelectAll,
-                                    theme: pickerTheme,
-                                    icon: const Icon(
-                                      Icons.layers_clear_sharp,
-                                      size: 18,
+                                  const Spacer(),
+                                  if (actions != null) ...actions!,
+                                  if (!hideUnselectButton)
+                                    CircleIconButton(
+                                      onTap: unSelectAll,
+                                      theme: pickerTheme,
+                                      icon: const Icon(
+                                        Icons.camera,
+                                        size: 18,
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
