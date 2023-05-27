@@ -149,7 +149,7 @@ class CropViewerState extends State<CropViewer> {
                   _previousAsset = asset;
 
                   // don't show crop button if an asset is selected or if there is only one crop
-                  return selected.length > 1 ||
+                  return selected.length > 10 ||
                           widget.controller.cropDelegate.cropRatios.length <= 1
                       ? _buildCropView(asset, savedCropParam)
                       : ValueListenableBuilder<int>(
